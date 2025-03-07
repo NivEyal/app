@@ -1,0 +1,26 @@
+<%= form_with url: submission_path(@submission), method: :patch, id: "submission-form" do %>
+  <textarea id="user-text" class="form-control" placeholder="Enter your text here..."></textarea>
+
+  <div class="mt-4">
+    <button type="submit" name="decision" value="keep" id="keep-btn" class="btn btn-success" disabled>Keep</button>
+    <button type="submit" name="decision" value="discard" id="discard-btn" class="btn btn-danger" disabled>Discard</button>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let userText = document.getElementById("user-text");
+    let keepBtn = document.getElementById("keep-btn");
+    let discardBtn = document.getElementById("discard-btn");
+
+    userText.addEventListener("input", function() {
+      if (userText.value.trim().length > 0) {
+        keepBtn.removeAttribute("disabled");
+        discardBtn.removeAttribute("disabled");
+      } else {
+        keepBtn.setAttribute("disabled", "true");
+        discardBtn.setAttribute("disabled", "true");
+      }
+    });
+  });
+</script>

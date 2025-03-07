@@ -1,0 +1,10 @@
+<button id="insert-date" class="btn btn-secondary">Insert Date</button>
+<p id="date-field" class="text-center mt-2 font-semibold text-lg"></p>
+
+<script>
+  document.getElementById("insert-date").addEventListener("click", function() {
+    let dateField = document.getElementById("date-field");
+    let currentDate = new Date().toLocaleDateString(); // Format date correctly
+    dateField.innerText = "Signed on: " + currentDate;
+  });
+</script>

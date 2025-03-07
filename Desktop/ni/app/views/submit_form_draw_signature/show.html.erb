@@ -1,0 +1,36 @@
+<canvas id="signature-pad" width="400" height="200"></canvas>
+
+<%= form_with url: submission_path(@submission), method: :patch, id: "signature-form" do %>
+  <div class="mt-4">
+    <button type="submit" name="decision" value="keep" id="keep-sign-btn" class="btn btn-success" disabled>Keep</button>
+    <button type="submit" name="decision" value="discard" id="discard-sign-btn" class="btn btn-danger" disabled>Discard</button>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let canvas = document.getElementById("signature-pad");
+    let ctx = canvas.getContext("2d");
+    let keepSignBtn = document.getElementById("keep-sign-btn");
+    let discardSignBtn = document.getElementById("discard-sign-btn");
+    let isSigned = false;
+
+    canvas.addEventListener("mousedown", function() {
+      isSigned = true;
+    });
+
+    canvas.addEventListener("mouseup", function() {
+      if (isSigned) {
+        keepSignBtn.removeAttribute("disabled");
+        discardSignBtn.removeAttribute("disabled");
+      }
+    });
+
+    document.getElementById("quick-sign").addEventListener("click", function() {
+      ctx.font = "30px Arial";
+      ctx.fillText("User Signature", 50, 100);
+      keepSignBtn.removeAttribute("disabled");
+      discardSignBtn.removeAttribute("disabled");
+    });
+  });
+</script>
